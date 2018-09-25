@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+<input id="username" placeholder="username" hidden>
+<input id="password" placeholder="password" type="password" hidden>
+<input id="email" placeholder="email" hidden>
+    
+    <button onclick="showLogin()">Logg inn</button>
+    <button onclick="showRegister()">Registrer bruker</button>
+    <button id="Registrering" onclick="sendData()" hidden>Send data</button>
+<a id="output"></a>
+</body>
+<script>
+   /* const STUDENTENDPOINT = "app/"
+function sendStudentName(){
+    let studentName = document.getElementById("username").value; }*/
+   let username = document.getElementById("username");
+   let password = document.getElementById("password");
+   let email = document.getElementById("email");
+   let registrerKnapp = document.getElementById("Registrering");
+
+   function showLogin() {
+
+   }
+
+   function showRegister() {
+       username.hidden = false;
+       password.hidden = false;
+       email.hidden = false;
+       registrerKnapp.hidden = true;
+   }
+
+    function sendData(){
+        /*console.log("sender");
+        fetch('localhost:8080/app/user', {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify({
+                "name":document.getElementById("username").value,
+                "email":document.getElementById("email").value,
+                "password":document.getElementById("password").value
+            })
+        }).then(data =>{
+            console.log(data.json());
+        });
+*/
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "http://localhost:8080/app/user", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.onreadystatechange = function () {
+            if(this.readyState === XMLHttpRequest.DONE && this.status === 200){
+                //document.getElementById("output").innerHTML = "respons";
+                //console.log("statechange");
+            }
+        };
+        xhttp.send(JSON.stringify({
+            "name":document.getElementById("username").value,
+            "email":document.getElementById("email").value,
+            "password":document.getElementById("password").value
+        }));
+    }
+
+
+</script>
+</html>
