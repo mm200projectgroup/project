@@ -9,9 +9,9 @@
 <input id="username" placeholder="username" hidden>
 <input id="password" placeholder="password" type="password" hidden>
 <input id="email" placeholder="email" hidden>
-    
-    <button onclick="showLogin()">Logg inn</button>
-    <button onclick="showRegister()">Registrer bruker</button>
+
+    <button onclick="showLogin()" id="visLogin" hidden>Logg inn</button>
+    <button onclick="showRegister()" id="visRegister">Registrer bruker</button>
     <button id="Registrering" onclick="sendData()" hidden>Send data</button>
 <a id="output"></a>
 </body>
@@ -23,6 +23,8 @@ function sendStudentName(){
    let password = document.getElementById("password");
    let email = document.getElementById("email");
    let registrerKnapp = document.getElementById("Registrering");
+   let visRegister = document.getElementById("visRegister");
+   let visLogin = document.getElementById("visLogin");
 
    function showLogin() {
 
@@ -32,7 +34,9 @@ function sendStudentName(){
        username.hidden = false;
        password.hidden = false;
        email.hidden = false;
-       registrerKnapp.hidden = true;
+       registrerKnapp.hidden = false;
+        visRegister.hidden = true;
+        visRegister.hidden = true;
    }
 
     function sendData(){
