@@ -2,8 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ourServer = express();
 const port = (process.env.PORT || 8080);
+
 const users = [];
-//let output = document.getElementById("output");
+const login =[];
+
+
+
 
 
 ourServer.set('port', port);
@@ -15,28 +19,27 @@ ourServer.listen(ourServer.get('port'), function () {
 });
 
 ourServer.post("/app/user", function (req, res) {
-    //res.send(req.body.email).end();
     let user = req.body;
-
     user.id = users.length + 1;
     users.push(user);
-
+    
     res.json(user).end();
     console.log(req.body);
+    
 });
 
 ourServer.post("/app/login", function (req, res) {
-    //res.send("Hello");
+   
     let login = req.body;
 
     for(let i in users){
-        if(login.email == users[i].email){
+        if(login.username == users[i].username){
             if(login.password == users[i].password){
                // document.body.innerHTML = "Hello, " + users[i].name + "!";
-                res.send("login successful");
+            console.log("login successful");
             }
             else {//output.innerHTML = "Wrong password";
-            res.send("Wrong password");}
+            console.log("Wrong password");}
         }
         else{//output.innerHTML = "User does not exist";
         res.send(JSON.stringify(users))}

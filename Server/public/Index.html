@@ -5,72 +5,71 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>Hello World</h1>
-<input id="username" placeholder="username" hidden>
-<input id="password" placeholder="password" type="password" hidden>
-<input id="email" placeholder="email" hidden>
+    <h1>Registrer</h1>
+        <input id="username" placeholder="username" >
+        <input id="password" placeholder="password" type="password" >
+        <input id="email" placeholder="email" >
+        <button id="registrering" onclick="sendData()" >Registrer</button>
+        <hr>
+    <h1>Logg inn</h1>
+        <input id="logInnUsername" placeholder="username" >
+        <input id="loggInnpassword" placeholder="password" type="password" >
+        <button id="loggInn" onclick="loggInn()" >loggInn</button>
 
-    <button onclick="showLogin()" id="visLogin" hidden>Logg inn</button>
-    <button onclick="showRegister()" id="visRegister">Registrer bruker</button>
-    <button id="Registrering" onclick="sendData()" hidden>Send data</button>
-<a id="output"></a>
 </body>
 <script>
-   /* const STUDENTENDPOINT = "app/"
-function sendStudentName(){
-    let studentName = document.getElementById("username").value; }*/
+
    let username = document.getElementById("username");
    let password = document.getElementById("password");
    let email = document.getElementById("email");
-   let registrerKnapp = document.getElementById("Registrering");
-   let visRegister = document.getElementById("visRegister");
-   let visLogin = document.getElementById("visLogin");
+   let registrering = document.getElementById("registrering");
+  
+    let loggInnUsername = document.getElementById("logInnUsername");
+    let loggInnpassword = document.getElementById("loggInnpassword");
 
-   function showLogin() {
 
-   }
 
-   function showRegister() {
-       username.hidden = false;
-       password.hidden = false;
-       email.hidden = false;
-       registrerKnapp.hidden = false;
-        visRegister.hidden = true;
-        visRegister.hidden = true;
-   }
 
     function sendData(){
-        /*console.log("sender");
-        fetch('localhost:8080/app/user', {
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify({
-                "name":document.getElementById("username").value,
-                "email":document.getElementById("email").value,
-                "password":document.getElementById("password").value
-            })
-        }).then(data =>{
-            console.log(data.json());
-        });
-*/
-        let xhttp = new XMLHttpRequest();
 
-        xhttp.open("POST", "http://localhost:8080/app/user", true);
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        xhttp.onreadystatechange = function () {
-            if(this.readyState === XMLHttpRequest.DONE && this.status === 200){
-                //document.getElementById("output").innerHTML = "respons";
-                //console.log("statechange");
-            }
-        };
-        xhttp.send(JSON.stringify({
-            "name":document.getElementById("username").value,
-            "email":document.getElementById("email").value,
-            "password":document.getElementById("password").value
-        }));
+        
+        return fetch("http://localhost:8080/app/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                name:document.getElementById("username").value,
+                email:document.getElementById("email").value,
+                password:document.getElementById("password").value
+                })
+            }).then(data => {
+                return data.json();
+            });
+        
+        
     }
+    
+    
+    function loggInn(){
+        console.log("test");
+        return fetch("http://localhost:8080/app/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                name:document.getElementById("logInnUsername").value,
+                password:document.getElementById("loggInnpassword").value
+                })
+            }).then(data => {
+                return data.json();
+            });
+        
+        
+    }
+    
+    
 
 
 </script>
