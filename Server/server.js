@@ -4,7 +4,7 @@ const ourServer = express();
 const port = (process.env.PORT || 8080);
 
 const users = [];
-const login =[];
+
 
 
 
@@ -33,17 +33,32 @@ ourServer.post("/app/login", function (req, res) {
     let login = req.body;
 
     for(let i in users){
-        if(login.username == users[i].username){
+        if(login.name == users[i].name){
             if(login.password == users[i].password){
-               // document.body.innerHTML = "Hello, " + users[i].name + "!";
+               
             console.log("login successful");
+            
+                ourServer.get('/app/users', function(req,res, next){
+                res.json(users).end();
+                });
+                
+                
+                
+                
             }
-            else {//output.innerHTML = "Wrong password";
+            else {
             console.log("Wrong password");}
         }
-        else{//output.innerHTML = "User does not exist";
-        res.send(JSON.stringify(users))}
+        else{
+        console.log("user does not exist");
+        //res.send(JSON.stringify(users));
+        }
     }
+    
+    
+    
+    
+
 
 
 });

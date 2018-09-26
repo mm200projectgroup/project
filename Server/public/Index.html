@@ -15,59 +15,98 @@
         <input id="logInnUsername" placeholder="username" >
         <input id="loggInnpassword" placeholder="password" type="password" >
         <button id="loggInn" onclick="loggInn()" >loggInn</button>
+    
+    <h3 id="output"></h3>
+    
+    
+   
+    
 
 </body>
 <script>
 
-   let username = document.getElementById("username");
-   let password = document.getElementById("password");
-   let email = document.getElementById("email");
-   let registrering = document.getElementById("registrering");
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let email = document.getElementById("email");
   
     let loggInnUsername = document.getElementById("logInnUsername");
     let loggInnpassword = document.getElementById("loggInnpassword");
+    
+    let output = document.getElementById("output");
+    
+    
+    
+    
+    
+    //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
 
+    (function(){
+            sayHello();
+        })();
+    
+    
+    function sayHello(){
+            fetch("http://localhost:8080/app/users").then(data => {
+                return data.json();
+            }).then(users =>{
+                testFunksjon(users,output)
+            });
+        }
+    
+    
+    
+    function testFunksjon(userNames, target) {
+            
 
-
-
+            userNames.forEach(user => {
+            console.log(user)
+            target.innerHTML= "Velkommen " +user.name;
+            });
+        }
+    
+    //----------------------------------------------------------------------
+    
+    
+//Registerer bruker
     function sendData(){
-
-        
         return fetch("http://localhost:8080/app/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
                 body: JSON.stringify({
-                name:document.getElementById("username").value,
-                email:document.getElementById("email").value,
-                password:document.getElementById("password").value
+                    name:document.getElementById("username").value,
+                    email:document.getElementById("email").value,
+                    password:document.getElementById("password").value
                 })
             }).then(data => {
                 return data.json();
             });
-        
-        
     }
     
     
+    
+    //Sender inn logginn info for å teste på serveren
     function loggInn(){
-        console.log("test");
         return fetch("http://localhost:8080/app/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
                 body: JSON.stringify({
-                name:document.getElementById("logInnUsername").value,
-                password:document.getElementById("loggInnpassword").value
+                    name:document.getElementById("logInnUsername").value,
+                    password:document.getElementById("loggInnpassword").value
                 })
             }).then(data => {
                 return data.json();
             });
-        
-        
     }
+    
+   
+
+    
+    
+    
     
     
 
