@@ -33,32 +33,20 @@ ourServer.post("/app/login", function (req, res) {
     let login = req.body;
 
     for(let i in users){
-        if(login.name == users[i].name){
-            if(login.password == users[i].password){
-               
-            console.log("login successful");
-            
-                ourServer.get('/app/users', function(req,res, next){
-                res.json(users).end();
+        if(login.name == users[i].name && login.password == users[i].password){
+               let username = users[i].name;
+                console.log(username);
+                //Sender ut brukernavn
+                ourServer.get('/app/login', function(req,res, next){
+                res.json(username).end();
                 });
+                break;
                 
-                
-                
-                
-            }
-            else {
-            console.log("Wrong password");}
-        }
-        else{
-        console.log("user does not exist");
-        //res.send(JSON.stringify(users));
-        }
-    }
-    
-    
-    
-    
+            
 
+        }
+
+    }
 
 
 });

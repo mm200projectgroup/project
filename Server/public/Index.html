@@ -46,24 +46,16 @@
     
     
     function sayHello(){
-            fetch("http://localhost:8080/app/users").then(data => {
+            fetch("http://localhost:8080/app/login").then(data => {
                 return data.json();
-            }).then(users =>{
-                testFunksjon(users,output)
+            }).then(username =>{
+                output.innerHTML= "Velkommen " + username;
             });
         }
     
     
     
-    function testFunksjon(userNames, target) {
-            
 
-            userNames.forEach(user => {
-            console.log(user)
-            target.innerHTML= "Velkommen " +user.name;
-            });
-        }
-    
     //----------------------------------------------------------------------
     
     
