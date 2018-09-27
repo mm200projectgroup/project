@@ -40,9 +40,9 @@
     
     //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
 
-    (function(){
-            sayHello();
-        })();
+
+    
+ 
     
     
     function sayHello(){
@@ -78,6 +78,9 @@
     
     
     
+    
+    
+    
     //Sender inn logginn info for å teste på serveren
     function loggInn(){
         return fetch("http://localhost:8080/app/login", {
@@ -92,6 +95,8 @@
             }).then(data => {
                 return data.json();
             });
+        
+        
     }
     
    
