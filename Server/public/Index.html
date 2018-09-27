@@ -24,7 +24,6 @@
 
 </body>
 <script>
-
     let username = document.getElementById("username");
     let password = document.getElementById("password");
     let email = document.getElementById("email");
@@ -39,14 +38,6 @@
     
     
     //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
-<<<<<<< HEAD
-
-
-    
- 
-    
-=======
->>>>>>> 6cc7900f2ecd7eaf3d047903cac431a965a209e4
     
     function sayHello(){
             fetch("http://localhost:8080/app/login").then(data => {
@@ -58,7 +49,6 @@
     
     
     
-
     //----------------------------------------------------------------------
     
     
@@ -81,9 +71,6 @@
     
     
     
-    
-    
-    
     //Sender inn logginn info for å teste på serveren
     function loggInn(){
          fetch("http://localhost:8080/app/login", {
@@ -96,12 +83,6 @@
                     password:document.getElementById("loggInnpassword").value
                 })
             }).then(data => {
-<<<<<<< HEAD
-                return data.json();
-            });
-        
-        
-=======
                 return data;
             }, fault => {
                 console.error(fault);
@@ -110,18 +91,13 @@
             }).catch(error =>{
                 console.log(error);
          });
-
->>>>>>> 6cc7900f2ecd7eaf3d047903cac431a965a209e4
     }
     
    
-
     
     
     
     
     
-
-
 </script>
 </html>
