@@ -36,10 +36,12 @@ ourServer.post("/app/login", function (req, res) {
         if(login.name == users[i].name && login.password == users[i].password){
                let username = users[i].name;
                 console.log(username);
+            res.send("ok");
                 //Sender ut brukernavn
                 ourServer.get('/app/login', function(req,res, next){
                 res.json(username).end();
                 });
+
                 break;
                 
             

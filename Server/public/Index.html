@@ -39,11 +39,14 @@
     
     
     //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
+<<<<<<< HEAD
 
 
     
  
     
+=======
+>>>>>>> 6cc7900f2ecd7eaf3d047903cac431a965a209e4
     
     function sayHello(){
             fetch("http://localhost:8080/app/login").then(data => {
@@ -83,7 +86,7 @@
     
     //Sender inn logginn info for å teste på serveren
     function loggInn(){
-        return fetch("http://localhost:8080/app/login", {
+         fetch("http://localhost:8080/app/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
@@ -93,10 +96,22 @@
                     password:document.getElementById("loggInnpassword").value
                 })
             }).then(data => {
+<<<<<<< HEAD
                 return data.json();
             });
         
         
+=======
+                return data;
+            }, fault => {
+                console.error(fault);
+         }).then(function (data) {
+                sayHello();
+            }).catch(error =>{
+                console.log(error);
+         });
+
+>>>>>>> 6cc7900f2ecd7eaf3d047903cac431a965a209e4
     }
     
    
