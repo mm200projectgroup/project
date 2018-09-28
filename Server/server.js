@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const ourServer = express();
 const port = (process.env.PORT || 8080);
 const users = [];
+
 //let output = document.getElementById("output");
 
 
@@ -17,13 +18,20 @@ ourServer.listen(ourServer.get('port'), function () {
 ourServer.post("/app/user", function (req, res) {
     //res.send(req.body.email).end();
     let user = req.body;
-
+    
     user.id = users.length + 1;
     users.push(user);
-
     res.json(user).end();
     console.log(req.body);
+    
+    
+    
+    
+    
 });
+
+
+
 
 ourServer.post("/app/login", function (req, res) {
     //res.send("Hello");
