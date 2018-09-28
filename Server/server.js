@@ -2,9 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ourServer = express();
 const port = (process.env.PORT || 8080);
+
 const users = [];
 
+<<<<<<< HEAD
 //let output = document.getElementById("output");
+=======
+
+
+
+>>>>>>> 6cc7900f2ecd7eaf3d047903cac431a965a209e4
 
 
 ourServer.set('port', port);
@@ -16,8 +23,8 @@ ourServer.listen(ourServer.get('port'), function () {
 });
 
 ourServer.post("/app/user", function (req, res) {
-    //res.send(req.body.email).end();
     let user = req.body;
+<<<<<<< HEAD
     
     user.id = users.length + 1;
     users.push(user);
@@ -28,26 +35,39 @@ ourServer.post("/app/user", function (req, res) {
     
     
     
+=======
+    user.id = users.length + 1;
+    users.push(user);
+    
+    res.json(user).end();
+    console.log(req.body);
+    
+>>>>>>> 6cc7900f2ecd7eaf3d047903cac431a965a209e4
 });
 
 
 
 
 ourServer.post("/app/login", function (req, res) {
-    //res.send("Hello");
+   
     let login = req.body;
 
     for(let i in users){
-        if(login.email == users[i].email){
-            if(login.password == users[i].password){
-               // document.body.innerHTML = "Hello, " + users[i].name + "!";
-                res.send("login successful");
-            }
-            else {//output.innerHTML = "Wrong password";
-            res.send("Wrong password");}
+        if(login.name == users[i].name && login.password == users[i].password){
+               let username = users[i].name;
+                console.log(username);
+            res.send("ok");
+                //Sender ut brukernavn
+                ourServer.get('/app/login', function(req,res, next){
+                res.json(username).end();
+                });
+
+                break;
+                
+            
+
         }
-        else{//output.innerHTML = "User does not exist";
-        res.send(JSON.stringify(users))}
+
     }
 
 
