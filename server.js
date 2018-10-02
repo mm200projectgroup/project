@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ourServer = express();
 const port = (process.env.PORT || 8080);
-
+let username;
 const users = [];
+
 
 
 
@@ -32,23 +33,17 @@ ourServer.post("/app/login", function (req, res) {
    
     let login = req.body;
 
-    for(let i in users){
-        if(login.name == users[i].name && login.password == users[i].password){
-               let username = users[i].name;
-                //console.log(username);
-                res.send("ok");
-                //Sender ut brukernavn
-                ourServer.get('/app/login', function(req,res, next){
-                res.json(username).end();
-                });
-
-                break;
-                
-            
-
-        }
-
+    let user = users.find(user => {
+       return login.name === user.name && login.password === user.password;
+    });
+    
+    if(user){
+        console.log(user);
+         res.json(user).end();
+    }else{
+        console.log("feil brukernavn eller passord")
+         res.status(400).send("feil brukernavn eller passord");
     }
-
-
+    
+    
 });

@@ -9,7 +9,7 @@
         <input id="username" placeholder="username" >
         <input id="password" placeholder="password" type="password" >
         <input id="email" placeholder="email" >
-        <button id="registrering" onclick="sendData()" >Registrer</button>
+        <button id="registrering" onclick="registerBruker()" >Registrer</button>
         <hr>
     <h1>Logg inn</h1>
         <input id="logInnUsername" placeholder="username" >
@@ -37,33 +37,28 @@
     
     
     
-    //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
+    
     
     function sayHello(){
             fetch("/app/login").then(data => {
                 return data.json();
-            }).then(username =>{
-                output.innerHTML= "Velkommen " + username;
+            }).then(user =>{
+                output.innerHTML= user.name;
             });
         }
     
     
-    
-    //----------------------------------------------------------------------
+
     
     
 //Registerer bruker
-    function sendData(){
-        return fetch("/app/user", {
+    function sendData(endpoint, data){
+        return fetch(endpoint, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
-                body: JSON.stringify({
-                    name:document.getElementById("username").value,
-                    email:document.getElementById("email").value,
-                    password:document.getElementById("password").value
-                })
+                body: JSON.stringify(data)
             }).then(data => {
                 return data.json();
             });
@@ -72,25 +67,43 @@
     
     
     //Sender inn logginn info for å teste på serveren
-    function loggInn(){
-         fetch("/app/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
-                body: JSON.stringify({
+    function loggInn(){   
+        
+        let user = {
                     name:document.getElementById("logInnUsername").value,
                     password:document.getElementById("loggInnpassword").value
-                })
-            }).then(data => {
-                return data;
-            }, fault => {
-                console.error(fault);
-         }).then(function (data) {
-                sayHello();
-            }).catch(error =>{
+                };
+        
+        sendData("/app/login",user)
+            .then(json => {output.innerHTML= "Velkommen " + json.name})
+            .catch(error =>{
+                output.innerHTML = "Feil brukernavn eller passord";
                 console.log(error);
-         });
+            });
+             
+             
+            
+    }
+    
+    
+    
+    
+    function registerBruker(){   
+        
+        let regInfo = {
+                    name:document.getElementById("username").value,
+                    password:document.getElementById("password").value,
+                    email:document.getElementById("email").value
+                };
+        
+        sendData("/app/user",regInfo)
+            .then(json => {console.log(json) })
+            .catch(error =>{
+                console.log(error);
+            });
+             
+             
+            
     }
     
    
