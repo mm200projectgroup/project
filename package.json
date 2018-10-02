@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/mm200projectgroup/project/issues"
   },
-  "homepage": "https://github.com/mm200projectgroup/project#readme"
+  "homepage": "https://github.com/mm200projectgroup/project#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
 }
