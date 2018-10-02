@@ -41,7 +41,7 @@
     //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
     
     function sayHello(){
-            fetch("http://localhost:8080/app/login").then(data => {
+            fetch("/app/login").then(data => {
                 return data.json();
             }).then(username =>{
                 output.innerHTML= "Velkommen " + username;
@@ -56,7 +56,7 @@
     
 //Registerer bruker
     function sendData(){
-        return fetch("http://localhost:8080/app/user", {
+        return fetch("/app/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
@@ -75,7 +75,7 @@
     
     //Sender inn logginn info for å teste på serveren
     function loggInn(){
-         fetch("http://localhost:8080/app/login", {
+         fetch("/app/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
