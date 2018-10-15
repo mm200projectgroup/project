@@ -1,0 +1,23 @@
+{
+  "name": "innafor",
+  "version": "1.0.0",
+  "description": "En app for å få inblikk i trifsel og sammhold i fotball lag, klasser o.m.m",
+  "main": "server.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "pg-promise": "^8.4.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "innafor"
+  ],
+  "author": "solveig, henrik, kristian, eirik",
+  "license": "ISC"
+}
