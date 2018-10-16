@@ -2,12 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ourServer = express();
 const port = (process.env.PORT || 8080);
-let username;
 const users = [];
-
-
-
-
 
 
 
