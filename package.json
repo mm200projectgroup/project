@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mm200projectgroup/project#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "pg": "^7.5.0"
   }
 }
