@@ -20,8 +20,6 @@ const users = require('./js/users.js');
 app.use('/innafor/users/', users);
 
 
-
-
 app.listen(app.get('port'), function () {
     console.log('server running', app.get('port'));
 });
