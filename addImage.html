@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> create images</title>
+	<meta charset="utf-8">
+	
+	</head>
+<body>
+	<button id="addImg" >Add image</button>
+	<input id="imgSlider" type="range" min="10" max="2000" step="1" >
+	<div id="presObj" style=" border-style: solid;">
+	
+	
+	</div>
+	
+	<script>
+		
+	let imgResizer = function() {	
+		let imgResizerObj = {};
+		let resizeAmount = 0.5;
+		let addImgBtn = document.getElementById("addImg")
+		let presObject = document.getElementById("presObj");
+		let imgSlider = document.getElementById("imgSlider");
+		let imgObj;	
+		
+		
+		
+		
+			presObject.style.width = screen.width - (screen.width* resizeAmount) + "px";
+			presObject.style.height = screen.height - (screen.height * resizeAmount) + "px";
+		
+		addImgBtn.addEventListener("click", addImg);
+		imgSlider.addEventListener("input", resizeImg);
+		
+	 function addImg() {
+		let presObjWidth = parseInt(presObject.style.width, 10);
+		let input = prompt("skriv inn lenke til bilde");
+		imgObj = document.createElement("IMG");
+			
+		imgObj.src = input;
+		imgObj.width = presObjWidth - (presObjWidth * 0.3);
+			
+		presObject.appendChild(imgObj);
+			
+			//etterhvert sjekk om linken faktsik er et bilde
+			
+			//console.log(input);
+		}
+	
+	 function resizeImg(e) {
+		if (imgObj){
+			imgObj.width = e.target.value;
+			//console.log(imgObj.width);
+		}
+		
+		
+		//console.log(e);
+	}	
+		return imgResizerObj;
+}
+	imgResizer();
+	
+	</script>
+	
+	
+	</body>
+
+</html>
