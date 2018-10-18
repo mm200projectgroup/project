@@ -24,7 +24,7 @@ router.post('/app/users/login', function (req, res, next) {
         
         
         
-        let nameMatch = user.username == username ? true : false;
+        let nameMatch = user.username === username ? true : false;
         let passwordMatch = bcrypt.compareSync(password, user.hash);
 
         if (nameMatch && passwordMatch) {

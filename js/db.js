@@ -1,6 +1,5 @@
-
-const {Pool,Client} = require('pg');
-const connectionString = 'postgres://postgres:PASSORD@localhost:5432/DATABASENAVN';
+const {Pool, Client} = require('pg');
+const connectionString = process.env.DATABASE_URL;
 const db = {};
 let respons = {};
 
@@ -8,9 +7,9 @@ let respons = {};
 function runQuery(query) {
     const client = new Client({
         connectionString: connectionString
-    })
+    });
     try {
-        client.connect()
+        client.connect();
         if (client) {
             client.query(query, (err, res) => {
                 //console.log(err, res)
@@ -18,29 +17,31 @@ function runQuery(query) {
                 client.end()
             })
 
-        };
-    } catch (e) { /*OOPS*/ }
-    
+        }
+    } catch (e) { /*OOPS*/
+    }
+
     return respons;
 
 
 }
+
 db.insert = function (query) {
     return runQuery(query);
-}
+};
 
 db.select = function (query) {
     return runQuery(query);
-}
+};
 
 db.delete = function (query) {
     //db.update(query);
     return runQuery(query);
-}
+};
 
 db.update = function (query) {
     return runQuery(query);
-}
+};
 
 module.exports.db = db;
 
