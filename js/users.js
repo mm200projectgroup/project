@@ -11,11 +11,11 @@ router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
     let query = `SELECT *
-	FROM public."Users" WHERE username = '${username}'`;
+	FROM public."users" WHERE username = '${username}'`;
 
     try {
 
-        let datarows = await db.any(query);
+        let datarows = await db.select(query);
         let nameMatch = datarows.length == 1 ? true : false;
 
         if (nameMatch == true) {
@@ -59,12 +59,12 @@ router.post("/register/", async function (req, res) {
     let userName = req.body.username;
     let password = req.body.password;
     let hashPassw = bcrypt.hashSync(password, 10);
-    let query = `INSERT INTO public."Users"(
-    email, username, hash)
-	VALUES ('${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
+
+    let query = `INSERT INTO "public"."Users"("email", "username", "hash") 
+        VALUES('${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
 
     try {
-        let code = db.any(query) ? 200 : 500;
+        let code = db.insert(query) ? 200 : 500;
         res.status(code).json({}).end()
 
     } catch (err) {
