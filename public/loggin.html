@@ -11,7 +11,7 @@
 
 <body>
     <div id="loggInnDiv">
-        <h1>#Innafor</h1>
+        <h1>#Prosjekt</h1>
         <input id="logInnUsername" placeholder="username">
         <br>
         <input id="loggInnpassword" placeholder="password" type="password">
@@ -42,7 +42,7 @@ height: 100%;
     }
     
     body{
-        background-color:deepskyblue;
+        background-color:lightpink;
 
     }
     
@@ -131,22 +131,14 @@ height: 100%;
             password: loggInnpassword.value
         };
 
-        sendData("/innafor/users/login", data)
+        sendData("/app/users/login", data)
             .then(json => {
-                if(json.status == 200 ){
-                    localStorage.setItem("logindata", JSON.stringify(json));
-                    let getUsername = JSON.parse(localStorage.getItem("logindata")).username;
-                    let getFullname = JSON.parse(localStorage.getItem("logindata")).fullname;
-                    output.style.color = "white";
-                    output.innerHTML = "Velkommen " + getFullname;
-                }else{
-                output.style.color = "red";
-                output.innerHTML = json.mld;
-                    
-                }
+
             })
             .catch(error => {
                 console.log(error);
+                output.style.color = "red";
+                output.innerHTML = error;
             });
 
     }

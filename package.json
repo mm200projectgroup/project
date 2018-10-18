@@ -1,23 +1,19 @@
 {
-  "name": "innafor",
+  "name": "complexassignment",
   "version": "1.0.0",
-  "description": "En app for å få inblikk i trifsel og sammhold i fotball lag, klasser o.m.m",
+  "description": "complex assignment group 13. Presentation tool",
   "main": "server.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "jsonwebtoken": "^8.3.0",
-    "pg-promise": "^8.4.6"
+    "express": "^4.16.4",
+    "pg": "^7.5.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [
-    "innafor"
-  ],
-  "author": "solveig, henrik, kristian, eirik",
+  "author": "grp 13",
   "license": "ISC"
 }
