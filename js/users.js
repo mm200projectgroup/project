@@ -11,19 +11,14 @@ router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
     let query = `SELECT *
-	FROM public."Users" WHERE username = '${username}'`;
-
+	FROM public."users" WHERE username = '${username}'`;
+    
     try {
-
         let datarows = await db.any(query);
+        console.log(datarows);
         let nameMatch = datarows.length == 1 ? true : false;
-
         if (nameMatch == true) {
-
-            let passwordMatch = await bcrypt.compareSync(password, datarows[0].hash);
-
-            console.log(nameMatch);
-
+            let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
             if (nameMatch, passwordMatch) {
                 res.status(200).json({
                     status: 200,
@@ -31,8 +26,6 @@ router.post("/login/", async function (req, res) {
                     username: username
                 });
             }
-
-
         } else {
             res.status(401).json({
                 status: 401,
@@ -60,12 +53,14 @@ router.post("/register/", async function (req, res) {
     let password = req.body.password;
     let hashPassw = bcrypt.hashSync(password, 10);
 
-    let query = `INSERT INTO "public"."Users"("email", "username", "hash") 
-        VALUES('${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
+    let query = `INSERT INTO public."users" ("id", "email", "username", "hash") VALUES (DEFAULT, '${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
+    
+    
+
+    
 
     try {
         let code = db.any(query) ? 200 : 500;
-        console.log(code);
         res.status(code).json({}).end()
 
     } catch (err) {
