@@ -11,11 +11,11 @@ router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
     let query = `SELECT *
-	FROM public."users" WHERE username = '${username}'`;
+	FROM public."Users" WHERE username = '${username}'`;
 
     try {
 
-        let datarows = await db.select(query);
+        let datarows = await db.any(query);
         let nameMatch = datarows.length == 1 ? true : false;
 
         if (nameMatch == true) {
@@ -64,7 +64,8 @@ router.post("/register/", async function (req, res) {
         VALUES('${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
 
     try {
-        let code = db.insert(query) ? 200 : 500;
+        let code = db.any(query) ? 200 : 500;
+        console.log(code);
         res.status(code).json({}).end()
 
     } catch (err) {
