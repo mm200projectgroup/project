@@ -4,17 +4,43 @@
     <meta charset="UTF-8">
     <title>Slides</title>
     <script src="Slide%20Templates.js"></script>
-    <link href="SlideTemplates.css" rel="stylesheet">
+    <style>
+
+        .grid-container-title {
+            display: grid;
+            height: 100vh;
+            grid-template-columns: 40px 1fr 1fr/* 1fr 1fr 1fr 1fr 1fr 1fr 80px */;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+            grid-template-areas:
+                    "div1 div1 div1" /*div1 div1 div1 div1 div1 div1 div1"*/
+                    "div1 div1 div2" /*div2 div2 div2 div2 div2 div1 div1"*/
+                    "div1 div1 div1" /*div1 div1 div1 div1 div1 div1 div1"*/
+                    "div1 div1 div1" /*div3 div3 div3 div3 div1 div1 div1"*/
+                    "div1 div1 div1" /*div3 div3 div3 div3 div1 div1 div1"*/
+                    "div1 div1 div1" /*div1 div1 div1 div1 div1 div1 div1";*/
+        }
+        .div0 {
+            background-color: lightgray;
+            grid-area: div1;
+
+        }
+        .div1 {
+            background-color: #767676;
+            grid-area: div2;
+        }
+        .div2 {
+            background-color: #5b5b5b;
+            grid-area: div3;
+        }
+    </style>
 </head>
 <body>
 <div class="grid-container-title">
-    <div id="div0"></div>
-    <div id="div1"></div>
-    <div id="div2"></div>
+    <div class="div0"></div>
+    <div class="div1"></div>
+    <div class="div2"></div>
 </div>
 
 </body>
-<script>
-
-</script>
 </html>
