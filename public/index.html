@@ -2,221 +2,10 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-w
-box-sizing: border-box;
-font-family: sans-serif;idth, initial-scale=1">
-    <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/javascript.js"></script>
+    <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
 
-        * {
-margin: 0px;
-font-size: 20pt;
-}
-
-
-body{
-height: 100vh;
-display: grid;
-
-grid-template-columns: 250px 1fr 1fr 1fr;
-grid-template-rows: 80px 1fr 1fr 1fr 1fr 150px;
-
-
-
-
-grid-template-areas:
-"header header header header"
-"menu canvas canvas canvas"
-"menu canvas canvas canvas"
-"menu canvas canvas canvas"
-"menu canvas canvas canvas"
-"menu footer footer footer";
-}
-
-
-
-
-
-.header {
-grid-area: header;
-background: #609af7;
-
-}
-
-.menu {
-grid-area: menu;
-background: gray;
-border: solid 1px aliceblue;
-
-}
-
-.canvas {
-grid-area: canvas;
-background: gray;
-border: solid 1px aliceblue;
-
-}
-
-.footer {
-grid-area: footer;
-background: gray;
-border: solid 1px aliceblue;
-
-}
-        
-    
-    
-    
-    
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    padding: 12px 20px;
-    margin: 8px 0;
-    margin-bottom: 30px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    text-align: center;
-}
-        
-        
-        
-#headerLogIn{
-    float: right;
-    color: black;
-    border: 0px;
-    width: 150%;
-    height: 50px;
-    display: inline-block;
-    background-color: white;
-    margin: 8px;
-    padding: auto;
-    font-family: sans-serif;
-    font-size: 14pt;
-    font-weight: bold;
-    border-radius: 25px;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    padding: 14px 20px;
-    transition: transform 0.2s;
-
-} 
-        
-        
-#loggInnBtn {
-    color: white;
-    background-color: #609af7;
-    border: 0px;
-    width: 20%;
-    display: inline-block;
-    margin: 8px;
-    padding: auto;
-    font-family: sans-serif;
-    font-size: 14pt;
-    font-weight: bold;
-    border-radius: 25px;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    padding: 14px 20px;
-    transition: transform 0.2s;
-}
-    
-    #loggInnBtn:hover {
-        transform:  scale(1.1, 1.1);
-    }
-    
-    #loggInnBtn:active{
-        background: gray;
-    }
-
-
-/* Center the image and position the close button */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-
-.container {
-    text-align: center;
-    padding: 16px;
-    margin-bottom: 30px
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
-}
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
-}
-</style>
 </head>
 
 <body>
@@ -224,50 +13,106 @@ span.psw {
 
 
 
-    <div id="id01" class="modal">
-
-        <form class="modal-content animate" action="/action_page.php">
+    <div id="logInForm" class="modal">
+        <div class="modal-content animate">
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <h2>Sign In</h2>
+                <span onclick="document.getElementById('logInForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Login</h2>
             </div>
 
             <div class="container">
-                <label for="uname"><b>Username</b></label>
+                <label for="username"><b>Username</b></label>
                 <br>
-                <input type="text" placeholder="Enter Username" id="uname" required>
+                <input type="text" id="loggInnUsername" placeholder="username" name="username">
                 <br>
-                <label for="psw"><b>Password</b></label>
+                <label for="password"><b>Password</b></label>
                 <br>
-                <input type="password" placeholder="Enter Password" id="psw" required>
-                <br>    
-                <button id="loggInnBtn" onclick="loggInn()">Logg inn</button>
+                <input type="password" id="loggInnpassword" placeholder="password" name="password">
+                <br>
+                <p id="outputLogIn"></p>
+                <br>
+                <button class="formButtons" onclick="loggInn()">Logg inn</button>
 
             </div>
-        </form>
+        </div>
+    </div>
+
+
+    <div id="signUpForm" class="modal">
+        <div class="modal-content animate">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('signUpForm').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <h2 class="modulHeader">Sign up</h2>
+            </div>
+
+            <div class="container">
+                <label for="email"><b>Email</b></label>
+                <br>
+                <input type="text" id="regEmail" placeholder="Email" name="email">
+                <br>
+                <label for="username"><b>Username</b></label>
+                <br>
+                <input type="text" id="regUsername" placeholder="username" name="username">
+                <br>
+                <label for="password"><b>Password</b></label>
+                <br>
+                <input type="password" id="regpassword" placeholder="password" name="password">
+                <br>
+                <h3 id="outputSignUp"></h3>
+                <br>
+                <button class="formButtons" onclick="register()">Sign up</button>
+
+            </div>
+        </div>
     </div>
 
 
 
+
     <div class="header">
-        <button id="headerLogIn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+        <button id="headerButton1" onclick="document.getElementById('signUpForm').style.display='block'" style="width:auto;">Sign up</button>
+        
+        <button id="headerButton2" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
+        
+        <h3 id="user"></h3>
+
+
     </div>
     <div class="menu">Menu</div>
     <div class="canvas">canvas</div>
     <div class="footer">Footer</div>
 
     <script>
+    let loggInnUsername = document.getElementById("loggInnUsername");
+    let loggInnpassword = document.getElementById("loggInnpassword");
+    
+    let regUsername = document.getElementById("regUsername");
+    let regPassword = document.getElementById("regpassword");    
+    let regEmail = document.getElementById("regEmail");
+    
+    let headerButton1 = document.getElementById("headerButton1");
+    let headerButton2 = document.getElementById("headerButton2");
+
+    let outputLogIn1 = document.getElementById("outputLogIn");
+    let outputSignUp1 = document.getElementById("outputSignUp");
+        let user = document.getElementById("user");
+    
+
+        
         // Get the modal
-        var modal = document.getElementById('id01');
+        var logInForm = document.getElementById('logInForm');
+        var signUpForm = document.getElementById('signUpForm');
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                console.log("hei")
+            if (event.target == logInForm) {
+                logInForm.style.display = "none";
+            }
+            if (event.target == signUpForm) {
+                signUpForm.style.display = "none";
             }
         }
-    </script>
+    </script>   
 
 </body>
 
