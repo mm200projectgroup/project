@@ -62,6 +62,7 @@
             .then(json => {
                 outputSignUp1.style.color = "white";
                 outputSignUp1.innerHTML = "Bruker registrert";
+                signUpForm.style.display = "none";
             })
             .catch(error => {
                 outputSignUp1.style.color = "red";

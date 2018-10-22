@@ -39,7 +39,7 @@
 
 
     <div id="signUpForm" class="modal">
-        <form class="modal-content animate">
+        <div class="modal-content animate">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('signUpForm').style.display='none'" class="close" title="Close Modal">&times;</span>
                 <h2 class="modulHeader">Sign up</h2>
@@ -60,10 +60,10 @@
                 <br>
                 <h3 id="outputSignUp"></h3>
                 <br>
-                <button class="formButtons" onclick="loggInn()">Sign up</button>
+                <button class="formButtons" onclick="register()">Sign up</button>
 
             </div>
-        </form>
+        </div>
     </div>
 
 
@@ -74,7 +74,7 @@
         
         <button id="headerButton2" onclick="document.getElementById('logInForm').style.display='block'" style="width:auto;">Login</button>
         
-        <h3 id="user">test</h3>
+        <h3 id="user"></h3>
 
 
     </div>
@@ -85,6 +85,7 @@
     <script>
     let loggInnUsername = document.getElementById("loggInnUsername");
     let loggInnpassword = document.getElementById("loggInnpassword");
+    
     let regUsername = document.getElementById("regUsername");
     let regPassword = document.getElementById("regpassword");    
     let regEmail = document.getElementById("regEmail");
@@ -93,9 +94,8 @@
     let headerButton2 = document.getElementById("headerButton2");
 
     let outputLogIn1 = document.getElementById("outputLogIn");
-    let user = document.getElementById("user");
     let outputSignUp1 = document.getElementById("outputSignUp");
-    
+        let user = document.getElementById("user");
     
 
         
@@ -112,7 +112,7 @@
                 signUpForm.style.display = "none";
             }
         }
-    </script>
+    </script>   
 
 </body>
 
