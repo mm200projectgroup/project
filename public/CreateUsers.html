@@ -16,7 +16,7 @@
         <br>
         <input id="regpassword" placeholder="password" type="password">
         <br>        
-        <input id="regEmail" placeholder="Email">
+        <input id="regFullname" placeholder="Full name">
         <br>
         <button id="regBtn" onclick="register()">Logg inn</button>
 
@@ -41,7 +41,7 @@ height: 100%;
     }
     
     body{
-        background-color:lightpink;
+        background-color:deepskyblue;
 
     }
     
@@ -101,7 +101,7 @@ height: 100%;
 
     let regUsername = document.getElementById("regUsername");
     let regPassword = document.getElementById("regpassword");    
-    let regEmail = document.getElementById("regEmail");
+    let regFullname = document.getElementById("regFullname");
 
     let output = document.getElementById("output");
     
@@ -128,11 +128,13 @@ height: 100%;
         let data = {
             username: regUsername.value,
             password: regPassword.value,
-            email: regEmail.value
+            fullname: regFullname.value
         };
 
         sendData("/innafor/users/register", data)
             .then(json => {
+                localStorage.setItem("regdata", JSON.stringify(json));
+                console.log(localStorage);
                 output.style.color = "white";
                 output.innerHTML = "Bruker registrert";
             })

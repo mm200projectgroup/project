@@ -11,7 +11,7 @@
 
 <body>
     <div id="loggInnDiv">
-        <h1>#Login</h1>
+        <h1>#Prosjekt</h1>
         <input id="logInnUsername" placeholder="username">
         <br>
         <input id="loggInnpassword" placeholder="password" type="password">
@@ -102,6 +102,7 @@ height: 100%;
 
     let loggInnUsername = document.getElementById("logInnUsername");
     let loggInnpassword = document.getElementById("loggInnpassword");
+
     let output = document.getElementById("output");
     
     
@@ -121,6 +122,7 @@ height: 100%;
 
 
 
+
     //Sender inn logginn info for å teste på serveren
     function loggInn() {
 
@@ -129,24 +131,15 @@ height: 100%;
             password: loggInnpassword.value
         };
 
-        sendData("/innafor/users/login", data)
+        sendData("/app/users/login", data)
             .then(json => {
-                console.log(json.status);
-                output.style.color = "white";
-                output.innerHTML = json.mld;
-            if(json.status == 200){
-                console.log("yay");
-                
-            }else{
-                console.log("ops");
-            }
+
             })
             .catch(error => {
-                output.innerHTML = error;
                 console.log(error);
+                output.style.color = "red";
+                output.innerHTML = error;
             });
-
-
 
     }
 
