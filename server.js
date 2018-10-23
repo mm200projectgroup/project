@@ -1,25 +1,49 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
-const port = (process.env.PORT || 3000);
+const ourServer = express();
+const port = (process.env.PORT || 8080);
+let username;
+const users = [];
 
 
-app.set('port', port);
-app.use(express.static('public'));
-app.use(bodyParser.json());
 
 
-app.use(function(req, res, next) {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-    next(); //go to the specified route
+
+
+
+ourServer.set('port', port);
+ourServer.use(express.static('public'));
+ourServer.use(bodyParser.json());
+
+ourServer.listen(ourServer.get('port'), function () {
+    console.log('server running', ourServer.get('port'));
 });
 
+ourServer.post("/app/user", function (req, res) {
+    let user = req.body;
+    user.id = users.length + 1;
+    users.push(user);
+    
+    res.json(user).end();
+    console.log(req.body);
+    
+});
 
-const users = require('./js/users.js');
-app.use('/innafor/users/', users);
+ourServer.post("/app/login", function (req, res) {
+   
+    let login = req.body;
 
-
-app.listen(app.get('port'), function () {
-    console.log('server running', app.get('port'));
+    let user = users.find(user => {
+       return login.name === user.name && login.password === user.password;
+    });
+    
+    if(user){
+        console.log(user);
+         res.json(user).end();
+    }else{
+        console.log("feil brukernavn eller passord")
+         res.status(400).send("feil brukernavn eller passord");
+    }
+    
+    
 });

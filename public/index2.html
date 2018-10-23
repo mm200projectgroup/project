@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Registrer</h1>
+        <input id="username" placeholder="username" >
+        <input id="password" placeholder="password" type="password" >
+        <input id="email" placeholder="email" >
+        <button id="registrering" onclick="sendData()" >Registrer</button>
+        <hr>
+    <h1>Logg inn</h1>
+        <input id="logInnUsername" placeholder="username" >
+        <input id="loggInnpassword" placeholder="password" type="password" >
+        <button id="loggInn" onclick="loggInn()" >loggInn</button>
+    
+    <h3 id="output"></h3>
+    
+    
+   
+    
+
+</body>
+<script>
+
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let email = document.getElementById("email");
+  
+    let loggInnUsername = document.getElementById("logInnUsername");
+    let loggInnpassword = document.getElementById("loggInnpassword");
+    
+    let output = document.getElementById("output");
+    
+    
+    
+    
+    
+    //---------Skriver ut. Ikke ferdig testet enda men tror den skal skrive ut det bruker navnet til den brukeren som logger inn. Må refreshe siden får å få opp teksten
+    
+    function sayHello(){
+            fetch("/app/login").then(data => {
+                return data.json();
+            }).then(username =>{
+                output.innerHTML= "Velkommen " + username;
+            });
+        }
+    
+    
+    
+
+    //----------------------------------------------------------------------
+    
+    
+//Registerer bruker
+    function sendData(){
+        return fetch("/app/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                    name:document.getElementById("username").value,
+                    email:document.getElementById("email").value,
+                    password:document.getElementById("password").value
+                })
+            }).then(data => {
+                return data.json();
+            });
+    }
+    
+    
+    
+    //Sender inn logginn info for å teste på serveren
+    function loggInn(){
+         fetch("/app/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                    name:document.getElementById("logInnUsername").value,
+                    password:document.getElementById("loggInnpassword").value
+                })
+            }).then(data => {
+                return data;
+            }, fault => {
+                console.error(fault);
+         }).then(function (data) {
+                sayHello();
+            }).catch(error =>{
+                console.log(error);
+         });
+
+    }
+    
+   
+
+    
+    
+    
+    
+    
+
+
+</script>
+</html>
