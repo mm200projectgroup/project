@@ -24,11 +24,9 @@ let status;
             password: loggInnpassword.value
         };
         
-
-        sendData("/innafor/users/login", data)
+        sendData("/app/users/login", data)
             .then(json => {
-                console.log(status);
-            
+                
             if(status == 200){
                 headerButton1.style.visibility = 'hidden';
                 headerButton2.style.visibility = 'hidden';
@@ -42,7 +40,6 @@ let status;
             }
             })
             .catch(error => {
-                outputLogIn1.innerHTML = error;
                 console.log(error);
             });
 
@@ -58,15 +55,13 @@ let status;
             email: regEmail.value
         };
 
-        sendData("/innafor/users/register", data)
+        sendData("/app/users/register", data)
             .then(json => {
                 outputSignUp1.style.color = "white";
                 outputSignUp1.innerHTML = "Bruker registrert";
                 signUpForm.style.display = "none";
             })
             .catch(error => {
-                outputSignUp1.style.color = "red";
-                outputSignUp1.innerHTML = "error";
                 console.log(error);
             });
 

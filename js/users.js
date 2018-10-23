@@ -1,22 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const db = require('./dbconnect').db; //database
+const db = require('./dbconnect'); //database
 const bcrypt = require('bcryptjs');
 
 
 
 
-router.post("/login/", async function (req, res) {
+router.post("/login/", async function (req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
     let query = `SELECT *
 	FROM public."users" WHERE username = '${username}'`;
-    
+    console.log(query);
     try {
-        let datarows = await db.any(query);
-        console.log(datarows);
-        let nameMatch = datarows.length == 1 ? true : false;
+        let datarows =  db.select(query);
+              console.log(datarows)
+       // let nameMatch = datarows.length == 1 ? true : false;
+  
+        
         if (nameMatch == true) {
             let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
             if (nameMatch, passwordMatch) {
@@ -33,6 +35,9 @@ router.post("/login/", async function (req, res) {
         }
 
     } catch (err) {
+        
+        console.log(err);
+        
         res.status(500).json({
             error: err
         }); //something went wrong!
@@ -45,7 +50,7 @@ router.post("/login/", async function (req, res) {
 
 
 
-router.post("/register/", async function (req, res) {
+router.post("/register/", function (req, res, next) {
     let userEmail = req.body.email;
     let userName = req.body.username;
     let password = req.body.password;
@@ -55,7 +60,7 @@ router.post("/register/", async function (req, res) {
     
 
     try {
-        let code = db.any(query) ? 200 : 500;
+        let code = db.insert(query) ? 200 : 500;
         res.status(code).json({}).end()
 
     } catch (err) {
@@ -68,64 +73,6 @@ router.post("/register/", async function (req, res) {
 
 
 
-
-router.post("/changePass/", async function (req, res) {
-
-    let changePass = req.body;
-
-    //let sql = `SELECT * FROM users WHERE loginname='${login.username}'`;
-
-
-    try {
-
-        let datarows = await db.any(sql);
-
-        console.log(datarows);
-
-
-        if (datarows.length <= 0) {
-            res.status(401).send("Feil brukernavn eller passord");
-            return;
-
-        }
-
-        let user = await datarows.find(user => {
-            return login.username === user.loginname;
-        });
-
-
-        let passwordMatch = await bcrypt.compareSync(login.password, user.password);
-
-
-        if (user && passwordMatch) {
-            //we have a valid user -> create the token        
-            let payload = {
-                username: datarows.loginname,
-                fullname: datarows.fullname
-            };
-            let tok = await jwt.sign(payload, secret, {
-                expiresIn: "12h"
-            });
-
-            //send logininfo + token to the client
-            res.status(200).json({
-                username: user.loginname,
-                fullname: user.fullname,
-                token: tok
-            });
-
-        } else {
-            res.status(401).send("Feil brukernavn eller passord");
-        }
-
-    } catch (err) {
-        res.status(500).json({
-            error: err
-        }); //something went wrong!
-    }
-
-
-});
 
 
 
