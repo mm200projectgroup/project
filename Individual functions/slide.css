@@ -1,0 +1,32 @@
+/* ---------------TITLE PAGE LAYOUT---------------------------------------------------------------------------------------*/
+.grid-container-title {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+}
+#divtitle0 {
+    grid-column: 2 / 9;
+    grid-row: 2;
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 200%;
+    border: 1px dotted;
+
+}
+#divtitle1 {
+    grid-column: 3/8;
+    grid-row: 4 / 5;
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 150%;
+    border: 1px dotted;
+}
