@@ -21,14 +21,12 @@ router.post("/login/", async function (req, res) {
             let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
             if (nameMatch, passwordMatch) {
                 res.status(200).json({
-                    status: 200,
                     mld: "Hello, " + username,
                     username: username
                 });
             }
         } else {
             res.status(401).json({
-                status: 401,
                 mld: "Feil brukernavn eller passord"
             });
 
@@ -54,9 +52,6 @@ router.post("/register/", async function (req, res) {
     let hashPassw = bcrypt.hashSync(password, 10);
 
     let query = `INSERT INTO public."users" ("id", "email", "username", "hash") VALUES (DEFAULT, '${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
-    
-    
-
     
 
     try {
