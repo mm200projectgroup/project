@@ -10,7 +10,7 @@ let status;
             },
             body: JSON.stringify(data)
         }).then(data => {
-            status = data.status
+            status = data.status;
             return data.json();
         });
     }
@@ -24,10 +24,13 @@ let status;
             password: loggInnpassword.value
         };
         
-        sendData("/app/users/login", data)
+
+        sendData("/innafor/users/login", data)
             .then(json => {
-                
+                console.log(json.status);
+                outputLogIn1.style.color = "black";
             if(status == 200){
+                console.log("yay");
                 headerButton1.style.visibility = 'hidden';
                 headerButton2.style.visibility = 'hidden';
                 logInForm.style.display = "none";
@@ -40,6 +43,7 @@ let status;
             }
             })
             .catch(error => {
+                outputLogIn1.innerHTML = error;
                 console.log(error);
             });
 
@@ -55,13 +59,15 @@ let status;
             email: regEmail.value
         };
 
-        sendData("/app/users/register", data)
+        sendData("/innafor/users/register", data)
             .then(json => {
                 outputSignUp1.style.color = "white";
                 outputSignUp1.innerHTML = "Bruker registrert";
                 signUpForm.style.display = "none";
             })
             .catch(error => {
+                outputSignUp1.style.color = "red";
+                outputSignUp1.innerHTML = "error";
                 console.log(error);
             });
 

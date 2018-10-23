@@ -15,8 +15,8 @@ router.post("/login/", async function (req, res) {
     
     try {
         let datarows = await db.any(query);
+        console.log(datarows);
         let nameMatch = datarows.length == 1 ? true : false;
-        
         if (nameMatch == true) {
             let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
             if (nameMatch, passwordMatch) {
@@ -45,13 +45,16 @@ router.post("/login/", async function (req, res) {
 
 
 
-router.post("/register/", function (req, res) {
+router.post("/register/", async function (req, res) {
     let userEmail = req.body.email;
     let userName = req.body.username;
     let password = req.body.password;
     let hashPassw = bcrypt.hashSync(password, 10);
 
     let query = `INSERT INTO public."users" ("id", "email", "username", "hash") VALUES (DEFAULT, '${userEmail}', '${userName}', '${hashPassw}') RETURNING "id", "email", "username", "hash"`;
+    
+    
+
     
 
     try {
@@ -68,6 +71,64 @@ router.post("/register/", function (req, res) {
 
 
 
+
+router.post("/changePass/", async function (req, res) {
+
+    let changePass = req.body;
+
+    //let sql = `SELECT * FROM users WHERE loginname='${login.username}'`;
+
+
+    try {
+
+        let datarows = await db.any(sql);
+
+        console.log(datarows);
+
+
+        if (datarows.length <= 0) {
+            res.status(401).send("Feil brukernavn eller passord");
+            return;
+
+        }
+
+        let user = await datarows.find(user => {
+            return login.username === user.loginname;
+        });
+
+
+        let passwordMatch = await bcrypt.compareSync(login.password, user.password);
+
+
+        if (user && passwordMatch) {
+            //we have a valid user -> create the token        
+            let payload = {
+                username: datarows.loginname,
+                fullname: datarows.fullname
+            };
+            let tok = await jwt.sign(payload, secret, {
+                expiresIn: "12h"
+            });
+
+            //send logininfo + token to the client
+            res.status(200).json({
+                username: user.loginname,
+                fullname: user.fullname,
+                token: tok
+            });
+
+        } else {
+            res.status(401).send("Feil brukernavn eller passord");
+        }
+
+    } catch (err) {
+        res.status(500).json({
+            error: err
+        }); //something went wrong!
+    }
+
+
+});
 
 
 
