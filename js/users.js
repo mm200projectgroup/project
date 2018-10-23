@@ -1,23 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const db = require('./dbconnect'); //database
+const db = require('./dbconnect').db; //database
 const bcrypt = require('bcryptjs');
 
 
 
 
-router.post("/login/", async function (req, res, next) {
+router.post("/login/", async function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
     let query = `SELECT *
 	FROM public."users" WHERE username = '${username}'`;
-    console.log(query);
+    
     try {
-        let datarows =  db.select(query);
-              console.log(datarows)
-       // let nameMatch = datarows.length == 1 ? true : false;
-  
+        let datarows = await db.any(query);
+        let nameMatch = datarows.length == 1 ? true : false;
         
         if (nameMatch == true) {
             let passwordMatch = bcrypt.compareSync(password, datarows[0].hash);
@@ -35,9 +33,6 @@ router.post("/login/", async function (req, res, next) {
         }
 
     } catch (err) {
-        
-        console.log(err);
-        
         res.status(500).json({
             error: err
         }); //something went wrong!
@@ -50,7 +45,7 @@ router.post("/login/", async function (req, res, next) {
 
 
 
-router.post("/register/", function (req, res, next) {
+router.post("/register/", function (req, res) {
     let userEmail = req.body.email;
     let userName = req.body.username;
     let password = req.body.password;
@@ -60,7 +55,7 @@ router.post("/register/", function (req, res, next) {
     
 
     try {
-        let code = db.insert(query) ? 200 : 500;
+        let code = db.any(query) ? 200 : 500;
         res.status(code).json({}).end()
 
     } catch (err) {
