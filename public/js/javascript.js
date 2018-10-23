@@ -1,4 +1,4 @@
-
+let status;
   
     
 
@@ -10,6 +10,7 @@
             },
             body: JSON.stringify(data)
         }).then(data => {
+            status = data.status
             return data.json();
         });
     }
@@ -26,10 +27,9 @@
 
         sendData("/innafor/users/login", data)
             .then(json => {
-                console.log(json.status);
-                outputLogIn1.style.color = "black";
-            if(json.status == 200){
-                console.log("yay");
+                console.log(status);
+            
+            if(status == 200){
                 headerButton1.style.visibility = 'hidden';
                 headerButton2.style.visibility = 'hidden';
                 logInForm.style.display = "none";
